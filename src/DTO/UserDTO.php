@@ -6,8 +6,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\Constraints as AppAssert;
 
 /**
- * @AppAssert\UniqueDTO(fields={"login"}, entityClass="App\Entity\User")
- * @AppAssert\UniqueDTO(fields={"email"}, entityClass="App\Entity\User")
+ * @AppAssert\UniqueDTO(fields={"userName": "login"}, mapToEntityClass="App\Entity\User")
+ * @AppAssert\UniqueDTO(fields={"email"}, mapToEntityClass="App\Entity\User")
  */
 class UserDTO
 {
@@ -17,7 +17,7 @@ class UserDTO
      * @Assert\NotBlank
      * @Assert\Length(max = 255)
      */
-    public $login;
+    public $userName;
 
     /**
      * @Assert\NotBlank

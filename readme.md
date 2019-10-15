@@ -7,7 +7,7 @@ Usage:
 ======
 
 For validating need to add annotation UniqueDTO on DTO class with 
-required parameters **fields** and **entityClass**.
+required parameters **fields** and **mapToEntityClass**.
 
 **Fields** required option is the field (or list of fields) on which this entity should be unique. For example, if you specified both the email and login field in a single UniqueEntity constraint, then it would enforce that the combination value is unique (e.g. two users could have the same email, as long as they don't have the same login also).
 
@@ -22,8 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\Constraints as AppAssert;
 
 /**
- * @AppAssert\UniqueDTO(fields={"login"}, entityClass="App\Entity\User")
- * @AppAssert\UniqueDTO(fields={"email"}, entityClass="App\Entity\User")
+ * @AppAssert\UniqueDTO(fields={"userName": "login"}, mapToEntityClass="App\Entity\User")
+ * @AppAssert\UniqueDTO(fields={"email"}, mapToEntityClass="App\Entity\User")
  */
 class UserDTO
 {
@@ -33,7 +33,7 @@ class UserDTO
      * @Assert\NotBlank
      * @Assert\Length(max = 255)
      */
-    public $login;
+    public $userName;
 
     /**
      * @Assert\NotBlank

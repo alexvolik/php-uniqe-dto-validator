@@ -13,7 +13,7 @@ class UserDTOType extends AbstractType
     {
         $builder
             ->add('id')
-            ->add('login')
+            ->add('userName')
             ->add('email')
         ;
     }

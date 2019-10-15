@@ -2,6 +2,8 @@
 
 namespace App\Mapper;
 
+use App\Helper\ArrayHelper;
+
 class DTOToEntityMapper
 {
     private $entity;
@@ -25,8 +27,16 @@ class DTOToEntityMapper
             $this->entity = $this->entityReflection->newInstanceWithoutConstructor();
         }
 
-        foreach ($fields as $field) {
-            $this->fillField($field, $field);
+        if (ArrayHelper::isAssocArray($fields)) {
+            foreach ($fields as $dtoField => $entityField) {
+                $dtoField = is_integer($dtoField) ? $entityField : $dtoField;
+
+                $this->fillField($dtoField, $entityField);
+            }
+        } else {
+            foreach ($fields as $field) {
+                $this->fillField($field, $field);
+            }
         }
 
         return $this->entity;
@@ -37,7 +47,7 @@ class DTOToEntityMapper
         return $this->dtoReflection;
     }
 
-    private function fillField(string $entityFieldName, string $dtoFieldName)
+    private function fillField(string $dtoFieldName, string $entityFieldName)
     {
         $this->checkField($this->entityReflection, $entityFieldName);
         $this->checkField($this->dtoReflection, $dtoFieldName);

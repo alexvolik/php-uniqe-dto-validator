@@ -13,18 +13,18 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class UniqueDTO extends UniqueEntity
 {
     /**
-     * Entity class which will be used for uniqueness check.
+     * Class on which will be DTO transferred before uniqueness check.
      *
      * @var string
      */
-    public $entityClass;
+    public $mapToEntityClass;
 
     /**
      * @return string[]
      */
     public function getRequiredOptions(): array
     {
-        return ['fields', 'entityClass'];
+        return ['fields', 'mapToEntityClass'];
     }
 
     public function validatedBy(): string
